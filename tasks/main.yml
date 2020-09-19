@@ -1,0 +1,7 @@
+---
+- name: "Install repos and packages for OpenSuse"
+  import_tasks: "opensuse_leap_15x.yml"
+  when:
+      - ansible_distribution == 'openSUSE Leap'
+      - ansible_distribution_major_version == '15'
+    

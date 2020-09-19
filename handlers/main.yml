@@ -1,0 +1,5 @@
+---
+- name: zypper_packman
+  command: 
+        cmd: "zypper dist-upgrade -y --from packman --allow-downgrade --allow-vendor-change"
+        warn: false

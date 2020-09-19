@@ -1,0 +1,62 @@
+---
+- name: "Install Packman repos"
+  zypper_repository:
+      name: packman
+      repo: "https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Leap_15.2"
+      auto_import_keys: yes
+  notify:
+      - "zypper_packman"
+
+- name: "Install common packages"
+  zypper:
+      name: 
+          - 'kernel-devel'
+          - 'python3-devel'
+          - 'exfat-utils' 
+          - 'fuse-exfat'
+          - 'cmake'
+          - 'tmux'
+          - 'keepass'
+          - 'git'
+          - 'fd'
+          - 'fzf'
+          - 'fzf-bash-completion'
+          - 'fzf-tmux'
+          - 'jq'
+      state: present
+  tags:
+      - install
+
+- name: 'Write global custom bashrc'
+  copy:
+      src:
+          bashrc
+      dest:
+          '/etc/bash.bashrc.local'
+      owner: root
+      group: root
+      mode: 0644
+
+- name: 'Write global gitconfig'
+  copy:
+      src: gitconfig
+      dest: '/etc/gitconfig'
+      owner: root
+      group: root
+      mode: 0644
+
+- name: 'Link FZF key bindings'
+  file:
+      path: '/etc/bash_completion.d/fzf-key-bindings'
+      src: '/usr/share/bash-completion/completions/fzf-key-bindings'
+      state: link
+
+- name: 'Link FZF bash completions'
+  file:
+      path: '/etc/bash_completion.d/fzf'
+      src: '/usr/share/bash-completion/completions/fzf'
+      state: link
+
+
+
+
