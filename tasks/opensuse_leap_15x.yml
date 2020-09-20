@@ -7,6 +7,9 @@
   notify:
       - "zypper_packman"
 
+- name: 'Flush handlers to dist-update packman repo'
+  meta: flush_handlers
+  
 - name: "Install common packages"
   zypper:
       name: 
